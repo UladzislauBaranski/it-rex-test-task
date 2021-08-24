@@ -1,0 +1,1 @@
+Shortest path to princess: 25

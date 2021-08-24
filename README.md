@@ -1,1 +1,0 @@
-# it-rex-test-task

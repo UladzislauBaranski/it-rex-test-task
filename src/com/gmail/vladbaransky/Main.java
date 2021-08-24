@@ -1,11 +1,15 @@
 package com.gmail.vladbaransky;
 
-import com.gmail.vladbaransky.impl.Task2Impl;
+import com.gmail.vladbaransky.impl.FirstTaskImpl;
+import com.gmail.vladbaransky.impl.SecondTaskImpl;
 
 public class Main {
 
     public static void main(String[] args) {
-        Task2 task2 = new Task2Impl();
-        task2.f();
+        FirstTask firstTask = new FirstTaskImpl();
+        firstTask.removeArticles(" the the th the qqqqqqqwwwqwwqwqeeeer222");
+
+        SecondTask secondTask = new SecondTaskImpl();
+        secondTask.getShortestPathToPrincess();
     }
 }

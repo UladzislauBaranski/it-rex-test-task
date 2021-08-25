@@ -40,10 +40,10 @@ public class FirstTaskImpl implements FirstTask {
     }
 
     public String removeLetterEAtEnd(String text) {
+        System.out.println("text: "+text);
         char[] wordByCharacterWithoutLastElementE;
         StringBuilder resultString = new StringBuilder();
         String[] textByWord = text.split(REGEX);
-
         for (int i = 0; i < textByWord.length; i++) {
             char[] wordByCharacter = textByWord[i].toCharArray();
             if (wordByCharacter[wordByCharacter.length - 1] == 'e' && wordByCharacter.length > 1) {

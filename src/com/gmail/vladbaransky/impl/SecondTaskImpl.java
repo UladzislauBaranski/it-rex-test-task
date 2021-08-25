@@ -84,7 +84,6 @@ public class SecondTaskImpl implements SecondTask {
                         valueK = (inputArray[k][i][j].equals(COLUMN)) ? DEADLOCK : NEXT_STEP;
                         indexValueK = (k + 1) * numberI * numberJ - 1;
                     } else {
-
                         if (i < numberI - 1) {
                             valueI = (inputArray[k][i + 1][j].equals(COLUMN)) ? DEADLOCK : NEXT_STEP;
                             indexValueI = (i + 1) * numberI + j + 1 + k * numberI * numberJ - 1;

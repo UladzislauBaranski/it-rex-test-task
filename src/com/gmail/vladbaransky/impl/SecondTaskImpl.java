@@ -15,7 +15,7 @@ import java.util.List;
 
 public class SecondTaskImpl implements SecondTask {
     private final static String FREE_SPACE = ".";
-    private final static String COLUMN = "O";
+    private final static String COLUMN = "o";
     private final static Integer DEADLOCK = 1;
     private final static Integer NEXT_STEP = 5;
     private final static String PRINCE_POSITION = "1";
@@ -80,7 +80,6 @@ public class SecondTaskImpl implements SecondTask {
                 for (int j = 0; j < numberJ; j++) {
 
                     if (i == numberI - 1 && j == numberJ - 1 && k == numberK - 1) {
-                        System.out.println("hello");
                         valueK = (inputArray[k][i][j].equals(COLUMN)) ? DEADLOCK : NEXT_STEP;
                         indexValueK = (k + 1) * numberI * numberJ - 1;
                         System.out.println("k:" + k + ", " + "i: " + i + ", " + "j:" + j);
@@ -95,20 +94,33 @@ public class SecondTaskImpl implements SecondTask {
 
                     if (i < numberI - 1) {
                         valueI = (inputArray[k][i + 1][j].equals(COLUMN)) ? DEADLOCK : NEXT_STEP;
-                        indexValueI = (i + 1) * numberI + j + 1 + k * numberI * numberJ - 1; //ok
+
+                        indexValueI = (i + 1) * numberI + j + 1 + k * numberI * numberJ - 1;
+                        System.out.println("k:" + k + ", " + "i: " + i + ", " + "j:" + j);
+                        System.out.println("I:" + indexValueI);
+                        System.out.println("valueI:" + valueI);
                     }
 
                     if (j < numberJ - 1) {
                         valueJ = (inputArray[k][i][j + 1].equals(COLUMN)) ? DEADLOCK : NEXT_STEP;
                         indexValueJ = (i) * numberJ + j + 1 + 1 + k * numberI * numberJ - 1;
+                        System.out.println("k:" + k + ", " + "i: " + i + ", " + "j:" + j);
+                        System.out.println("J:" + indexValueJ);
+                        System.out.println("valueJ:" + valueJ);
+
                     }
 
                     if (k < numberK - 1) {
                         valueK = (inputArray[k + 1][i][j].equals(COLUMN)) ? DEADLOCK : NEXT_STEP;
                         indexValueK = (k + 1) * numberI * numberJ + (i * numberI + j + 1) - 1;
+                        System.out.println("k:" + k + ", " + "i: " + i + ", " + "j:" + j);
+                        System.out.println("K:" + indexValueK);
+                        System.out.println("valueK:" + valueK);
 
                     } else {
                         indexValueK = (k + 1) * numberI * numberJ + (i * numberI + j + 1) - 1;
+                        System.out.println("k:" + k + ", " + "i: " + i + ", " + "j:" + j);
+                        System.out.println("nothing k end");
                     }
 
 
@@ -116,6 +128,7 @@ public class SecondTaskImpl implements SecondTask {
                         princesIndex = i * numberI + j + k * numberI * numberJ;
                     }
 
+                    System.out.println("-------------");
                     List<Integer> arr = new ArrayList<>();
                     int index = i * numberJ + j + k * numberI * numberJ;
                     for (int z = index; z < numberElementsArray; z++) {
@@ -149,49 +162,48 @@ public class SecondTaskImpl implements SecondTask {
         int[] d = new int[numberElementsArray];
         int[] v = new int[numberElementsArray];
         int temp;
-        int minindex;
+        int minIndex;
         int min;
-        int begin_index = 0;
+        int beginIndex = 0;
 
         for (int i = 0; i < numberElementsArray; i++) {
             d[i] = 10000;
             v[i] = 1;
         }
-        d[begin_index] = 0;
+        d[beginIndex] = 0;
 
         do {
-            minindex = 10000;
+            minIndex = 10000;
             min = 10000;
             for (int i = 0; i < numberElementsArray; i++) {
                 if ((v[i] == 1) && (d[i] < min)) {
                     min = d[i];
-                    minindex = i;
+                    minIndex = i;
                 }
             }
 
-
-            if (minindex != 10000) {
+            if (minIndex != 10000) {
                 for (int i = 0; i < numberElementsArray; i++) {
-                    if (adjacencyMatrix[minindex][i] == 2) {
+                    if (adjacencyMatrix[minIndex][i] == DEADLOCK) {
                         temp = 10000;
                         if (temp < d[i]) {
                             d[i] = temp;
                         }
-                    } else if (adjacencyMatrix[minindex][i] > 0) {
+                    } else if (adjacencyMatrix[minIndex][i] > 0) {
                         {
-                            temp = min + adjacencyMatrix[minindex][i];
+                            temp = min + adjacencyMatrix[minIndex][i];
                             if (temp < d[i]) {
                                 d[i] = temp;
                             }
                         }
                     }
                 }
-                v[minindex] = 0;
+                v[minIndex] = 0;
             }
-        } while (minindex != princesIndex);
+        } while (minIndex != princesIndex);
         int seconds = d[princesIndex];
-        System.out.println("seconds: " + seconds);
-        writeToFleShortestPath("Shortest path to princess: " + seconds);
+        System.out.println("seconds:" + seconds);
+        writeToFleShortestPath("Shortest path to princess: " + seconds + " seconds");
 
     }
 }

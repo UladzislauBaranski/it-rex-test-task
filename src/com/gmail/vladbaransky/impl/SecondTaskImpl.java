@@ -79,56 +79,60 @@ public class SecondTaskImpl implements SecondTask {
             for (int i = 0; i < numberI; i++) {
                 for (int j = 0; j < numberJ; j++) {
 
-                    if (i == numberI - 1 && j == numberJ - 1 && k == numberK - 1) {
+                  if (i == numberI - 1 && j == numberJ - 1) {
                         valueK = (inputArray[k][i][j].equals(COLUMN)) ? DEADLOCK : NEXT_STEP;
                         indexValueK = (k + 1) * numberI * numberJ - 1;
                         System.out.println("k:" + k + ", " + "i: " + i + ", " + "j:" + j);
                         System.out.println("K:" + indexValueK);
                         System.out.println("valueK:" + valueK);
-                        break;
-                    }
-                    if (i == numberI - 1 && j == numberJ - 1) {
-                        valueK = (inputArray[k + 1][i][j].equals(COLUMN)) ? DEADLOCK : NEXT_STEP;
-                        indexValueK = (k + 1) * numberI * numberJ + (i * numberI + j + 1) - 1;
-                    }
-
-                    if (i < numberI - 1) {
-                        valueI = (inputArray[k][i + 1][j].equals(COLUMN)) ? DEADLOCK : NEXT_STEP;
-
-                        indexValueI = (i + 1) * numberI + j + 1 + k * numberI * numberJ - 1;
-                        System.out.println("k:" + k + ", " + "i: " + i + ", " + "j:" + j);
-                        System.out.println("I:" + indexValueI);
-                        System.out.println("valueI:" + valueI);
-                    }
-
-                    if (j < numberJ - 1) {
-                        valueJ = (inputArray[k][i][j + 1].equals(COLUMN)) ? DEADLOCK : NEXT_STEP;
-                        indexValueJ = (i) * numberJ + j + 1 + 1 + k * numberI * numberJ - 1;
-                        System.out.println("k:" + k + ", " + "i: " + i + ", " + "j:" + j);
-                        System.out.println("J:" + indexValueJ);
-                        System.out.println("valueJ:" + valueJ);
-
-                    }
-
-                    if (k < numberK - 1) {
-                        valueK = (inputArray[k + 1][i][j].equals(COLUMN)) ? DEADLOCK : NEXT_STEP;
-                        indexValueK = (k + 1) * numberI * numberJ + (i * numberI + j + 1) - 1;
-                        System.out.println("k:" + k + ", " + "i: " + i + ", " + "j:" + j);
-                        System.out.println("K:" + indexValueK);
-                        System.out.println("valueK:" + valueK);
 
                     } else {
-                        indexValueK = (k + 1) * numberI * numberJ + (i * numberI + j + 1) - 1;
-                        System.out.println("k:" + k + ", " + "i: " + i + ", " + "j:" + j);
-                        System.out.println("nothing k end");
-                    }
 
+                        if (i < numberI - 1) {
+                            valueI = (inputArray[k][i + 1][j].equals(COLUMN)) ? DEADLOCK : NEXT_STEP;
+                            indexValueI = (i + 1) * numberI + j + 1 + k * numberI * numberJ - 1;
+                            System.out.println("k:" + k + ", " + "i: " + i + ", " + "j:" + j);
+                            System.out.println("I:" + indexValueI);
+                            System.out.println("valueI:" + valueI);
+                        } else {
+                            valueI = (inputArray[k][i][j + 1].equals(COLUMN)) ? DEADLOCK : NEXT_STEP;
+                            indexValueI = (i) * numberI + j + 1 + k * numberI * numberJ;
+                            System.out.println("k:" + k + ", " + "i: " + i + ", " + "j:" + j);
+                            System.out.println("I:" + indexValueI);
+                            System.out.println("valueI:" + valueI);
+                        }
+
+                        if (j < numberJ - 1) {
+                            valueJ = (inputArray[k][i][j + 1].equals(COLUMN)) ? DEADLOCK : NEXT_STEP;
+                            indexValueJ = (i) * numberJ + j + 1 + 1 + k * numberI * numberJ - 1;
+                            System.out.println("k:" + k + ", " + "i: " + i + ", " + "j:" + j);
+                            System.out.println("J:" + indexValueJ);
+                            System.out.println("valueJ:" + valueJ);
+
+                        } else {
+                            valueJ = (inputArray[k][i + 1][j].equals(COLUMN)) ? DEADLOCK : NEXT_STEP;
+                            indexValueJ = (i + 1) * numberJ + j + 1 + 1 + k * numberI * numberJ;
+
+                        }
+
+                        if (k < numberK - 1) {
+                            valueK = (inputArray[k + 1][i][j].equals(COLUMN)) ? DEADLOCK : NEXT_STEP;
+                            indexValueK = (k + 1) * numberI * numberJ + (i * numberI + j + 1) - 1;
+                            System.out.println("k:" + k + ", " + "i: " + i + ", " + "j:" + j);
+                            System.out.println("K:" + indexValueK);
+                            System.out.println("valueK:" + valueK);
+
+                        } else {
+                            indexValueK = (k + 1) * numberI * numberJ + (i * numberI + j + 1) - 1;
+                            System.out.println("k:" + k + ", " + "i: " + i + ", " + "j:" + j);
+                        }
+
+                    }
 
                     if (inputArray[k][i][j].equals(PRINCES_POSITION)) {
                         princesIndex = i * numberI + j + k * numberI * numberJ;
                     }
 
-                    System.out.println("-------------");
                     List<Integer> arr = new ArrayList<>();
                     int index = i * numberJ + j + k * numberI * numberJ;
                     for (int z = index; z < numberElementsArray; z++) {
@@ -185,10 +189,11 @@ public class SecondTaskImpl implements SecondTask {
             if (minIndex != 10000) {
                 for (int i = 0; i < numberElementsArray; i++) {
                     if (adjacencyMatrix[minIndex][i] == DEADLOCK) {
-                        temp = 10000;
+                       /* temp = 10000;
                         if (temp < d[i]) {
                             d[i] = temp;
-                        }
+                        }*/
+                       d[i]=10000;
                     } else if (adjacencyMatrix[minIndex][i] > 0) {
                         {
                             temp = min + adjacencyMatrix[minIndex][i];

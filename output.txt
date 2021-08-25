@@ -1,1 +1,1 @@
-Shortest path to princess: 25 seconds
+Shortest path to princess: 30 seconds
